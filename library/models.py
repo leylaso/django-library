@@ -19,7 +19,7 @@ class Author(models.Model):
 
 class Book(models.Model):
   title = models.CharField(max_length=256)
-  subtitle = models.CharField(max_length=256)
+  subtitle = models.CharField(max_length=256, blank=True)
   description = models.TextField('Description', blank=True)
   isbn = models.CharField(max_length=24, blank=True)
   oclc = models.CharField(max_length=24, blank=True)
@@ -50,9 +50,9 @@ class Loan(models.Model):
   borrower = models.ForeignKey(Borrower)
   borrowed = models.DateField("Date de l'empreunt")
   due = models.DateField("Date prévue de retour")
-  returned = models.DateField("Date actuel du retour", blank=True)
+  returned = models.DateField("Date actuel du retour", blank=True, null=True)
   def __unicode__(self):
-    return self.borrower + ': ' + self.book
+    return str(self.book) + ' (' + str(self.borrowed) + ' - ' + str(self.returned) + ')'
   def is_late(self):
     return self.due <= datetime.date.today()
       
