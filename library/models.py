@@ -54,5 +54,8 @@ class Loan(models.Model):
   def __unicode__(self):
     return str(self.book) + ' (' + str(self.borrowed) + ' - ' + str(self.returned) + ')'
   def is_late(self):
-    return self.due <= datetime.date.today()
+    if self.returned is None:
+      return self.due <= datetime.date.today()
+    else:
+      return False
       
