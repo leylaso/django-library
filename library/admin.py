@@ -14,6 +14,7 @@ class BookAdmin(admin.ModelAdmin):
   ]
   inlines = [LoanInline]
   list_display = ('title', 'category', 'language')
+  list_filter = ['category', 'language']
 
 class BorrowerAdmin(admin.ModelAdmin):
   inlines = [LoanInline]
