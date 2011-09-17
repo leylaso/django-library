@@ -9,6 +9,9 @@ urlpatterns = patterns('',
     # url(r'^$', 'dira_library.views.home', name='home'),
     # url(r'^dira_library/', include('dira_library.foo.urls')),
 
+    # Insert custom admin views for the library
+    url(r'^admin/library/', include('library.urls')),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
