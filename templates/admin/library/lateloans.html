@@ -1,39 +1,78 @@
 {% extends "admin/base_site.html" %}
 
+{% load adminmedia admin_list i18n %}
+{% load url from future %}
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/changelists.css" />
+  {% if cl.formset %}
+    <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />
+  {% endif %}
+  {% if cl.formset or action_form %}
+    {% url 'admin:jsi18n' as jsi18nurl %}
+    <script type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>
+  {% endif %}
+  {{ media.css }}
+  {% if not actions_on_top and not actions_on_bottom %}
+    <style>
+      #changelist table thead th:first-child {width: inherit}
+    </style>
+  {% endif %}
+{% endblock %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <div class="breadcrumbs">
+      <a href="../../">
+        {% trans "Home" %}
+      </a>
+       &rsaquo;
+       <a href="../">
+         {% trans "Library" %}
+      </a>
+      &rsaquo;
+      {% trans "Loans" %}
+    </div>
+  {% endblock %}
+{% endif %}
+
 {% block title %}Liste des emprunts en retard{% endblock %}
 
 {% block content %}
 <div id="content-main">
-  <table cellspacing="0" id="result_list">
-    <thead>
-      <tr>
-        <th scope="col">
-          Nom
-        </th>
-        <th scope="col">
-          Courriel
-        </th>
-        <th scope="col">
-          Téléphone
-        </th>
-        <th scope="col">
-          Date de l'emprunt
-        </th>
-        <th scope="col">
-          Date prévue du retour
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for loan in loans %}
-      <tr class="{% cycle 'row1' 'row2' %}">
-        <th><a href="/admin/library/borrower/{{ loan.borrower.id }}">{{ loan.borrower }}</a></th>
-        <td><a href="mailto:{{ loan.borrower.email }}">{{ loan.borrower.email }}</a></td>
-        <td>{{ loan.borrower.phone }}</td>
-        <td>{{ loan.borrowed }}</td>
-        <td>{{ loan.due }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <h1>Liste des emprunts en retard</h1>
+  <div class="module filtered" id="changelist">
+    <table cellspacing="0" id="result_list">
+      <thead>
+        <tr>
+          <th scope="col">
+            Nom
+          </th>
+          <th scope="col">
+            Courriel
+          </th>
+          <th scope="col">
+            Téléphone
+          </th>
+          <th scope="col">
+            Date de l'emprunt
+          </th>
+          <th scope="col">
+            Date prévue du retour
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for loan in loans %}
+        <tr class="{% cycle 'row1' 'row2' %}">
+          <th><a href="/admin/library/borrower/{{ loan.borrower.id }}">{{ loan.borrower }}</a></th>
+          <td><a href="mailto:{{ loan.borrower.email }}">{{ loan.borrower.email }}</a></td>
+          <td>{{ loan.borrower.phone }}</td>
+          <td>{{ loan.borrowed }}</td>
+          <td>{{ loan.due }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}

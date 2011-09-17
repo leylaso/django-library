@@ -4,6 +4,7 @@ from library.models import *
 
 urlpatterns = patterns('library.admin_views',
 
-  url(r'^lateloans$', 'lateLoans'),
+  url(r'^loan$', 'lateLoans'),
+  url(r'^loan/$', 'lateLoans'),
 
 )
