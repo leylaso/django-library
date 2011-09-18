@@ -1,0 +1,66 @@
+{% extends "library/dira.html" %}
+
+{% block title %}Livres du DIRA{% endblock %}
+
+{% block sidebar %}
+  {% if active %}
+  <div id="active-search">
+  <h3>Filtres actifs</h3>
+    {% for k, act in active.items %}
+    <a class="action" href="{{act.link}}">-</a> {{act.text}}<br />
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if langs %}
+  <div id="lang-search">
+  <h3>Filtrer par langue</h3>
+    {% for k, v in langs.items %}
+    <a class="action" href="{{v.link}}">+</a> {{v.text}} ({{v.count}})<br />
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if cats %}
+  <div id="cat-search">
+  <h3>Filtrer par section</h3>
+    {% for k, v in cats.items %}
+    <a class="action" href="{{v.link}}">+</a> {{v.text}} ({{v.count}})<br />
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if auths %}
+  <div id="auth-search">
+  <h3>Filtrer par auteur</h3>
+    {% for k, v in auths.items %}
+    <a class="action" href="{{v.link}}">+</a> {{v.text}} ({{v.count}})<br />
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <h1>Livres du DIRA</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Livre</th>
+        <th>Auteur</th>
+        <th>Section</th>
+        <th>Langue</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+        <tr class="{% cycle 'odd' 'even' %}">
+          <th><a href="/bk/{{book.id}}">{{book.title}}</a></th>
+          <td>{{book.author}}</td>
+          <td>{{book.category}}</td>
+          <td class="book-lang">{{book.language}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

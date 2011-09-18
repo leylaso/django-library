@@ -1,0 +1,37 @@
+{% extends "library/dira.html" %}
+
+{% block title %}{{book.title}}{% endblock %}
+
+{% block content %}
+  <h1 id="book-title">{{ book.title }}</h1>
+  <h2 id="book-subtitle">{{ book.subtitle }}</h2>
+
+  <div id="book-details">
+    <ul id="book-info">
+      {% if book.language %}
+      <li><label>Language</label>: <span><a href="/bk/language:{{book.language}}">{{book.language}}</a></span></li>
+      {% endif %}
+      {% if book.category %}
+      <li><label>Category</label>: <span><a href="/bk/category:{{book.category.id}}">{{book.category}}</a></span></li>
+      {% endif %}
+      {% if book.author %}
+      <li><label>Author</label>: <span><a href="/bk/author:{{book.author.id}}">{{book.author}}</a></span></li>
+      {% endif %}
+    </ul>
+    <ul id="book-numbers">
+      {% if book.olid %}
+      <li><label>Open Library ID</label>: <span>{{book.olid}}</span></li>
+      {% endif %}
+      {% if book.oclc %}
+      <li><label>OCLC/WorldCat</label>: <span><a href="http://www.worldcat.org/oclc/{{book.oclc}}?tab=details">{{book.oclc}}</a></span></li>
+      {% endif %}
+      {% if book.isbn %}
+      <li><label>ISBN</label>: <span>{{book.isbn}}</span></li>
+      {% endif %}
+      {% if book.lccn %}
+      <li><label>LCCN</label>: <span>{{book.lccn}}</span></li>
+      {% endif %}
+    </ul>
+    <div id="book-desc">{{ book.description }}</div>
+  </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <title>{% block title %}Livres du DIRA{% endblock %}</title>
+</head>
+
+<body>
+  <div id="nav">
+    <div class="button"><a href="http://bibliothequedira.wordpress.com/">Blog</a></div>
+    <div class="button"><a href="http://bibliothequedira.wordpress.com/about/">Qu'est-ce le DIRA?</a></div>
+  </div>
+  <div id="header">
+    <h1>BIBILIOTHÈQUE DIRA</h1>
+  </div>
+  <div id="main">
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="sidebar">
+        {% block sidebar %}{% endblock %}
+    </div>
+    <div id="footer">
+    </div>
+  </div>
+
+</body>
+</html>
+
