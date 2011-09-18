@@ -22,7 +22,7 @@ class Book(models.Model):
   subtitle = models.CharField(max_length=256, blank=True, verbose_name='Sous-titre')
   description = models.TextField(verbose_name='Déscription', blank=True)
   isbn = models.CharField(max_length=24, blank=True, verbose_name='ISBN')
-  oclc = models.CharField(max_length=24, blank=True, verbose_name='ICLC')
+  oclc = models.CharField(max_length=24, blank=True, verbose_name='OCLC')
   lccn = models.CharField(max_length=24, blank=True, verbose_name='LCCN')
   olid = models.CharField(max_length=24, blank=True, verbose_name='OLID')
   language = models.CharField(max_length=3, choices= (
