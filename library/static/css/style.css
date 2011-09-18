@@ -56,6 +56,14 @@ table td.book-lang {
   text-align: center;
 }
 
+#book-links {
+  float: right;
+}
+
+#sidebar ul {
+  padding-left: .5em;
+}
+
 /**
  * Colours and Images
  */

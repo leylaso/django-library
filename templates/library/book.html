@@ -3,25 +3,7 @@
 {% block title %}{{book.title}}{% endblock %}
 
 {% block sidebar %}
-  <div id="links">
-    {% if book.ebook %}
-      <a href="{{book.ebook}}" target="_blank"><h3>Version numérique</h3>
-    {% endif %}
-    {% if book.cover %}
-      <img src="{{book.cover}}" />
-    {% endif %}
-    {% if book.ebook %}
-      </a>
-    {% endif %}
- 
-  </div>
-{% endblock %}
-
-{% block content %}
-  <h1 id="book-title">{{ book.title }}</h1>
-  <h2 id="book-subtitle">{{ book.subtitle }}</h2>
-
-  <div id="book-details">
+  <div id="book-data">
     <ul id="book-info">
       {% if book.language %}
       <li><label>Language</label>: <span><a href="/bk/language:{{book.language}}">{{book.language}}</a></span></li>
@@ -51,6 +33,23 @@
       <li><label>LCCN</label>: <span>{{book.lccn}}</span></li>
       {% endif %}
     </ul>
-    <div id="book-desc">{{ book.description }}</div>
   </div>
+{% endblock %}
+
+{% block content %}
+  <div id="book-links">
+    {% if book.ebook %}
+      <a href="{{book.ebook}}" target="_blank"><h3>Version numérique</h3>
+    {% endif %}
+    {% if book.cover %}
+      <img src="{{book.cover}}" />
+    {% endif %}
+    {% if book.ebook %}
+      </a>
+    {% endif %}
+  </div>
+
+  <h1 id="book-title">{{ book.title }}</h1>
+  <h2 id="book-subtitle">{{ book.subtitle }}</h2>
+  <div id="book-desc">{{ book.description }}</div>
 {% endblock %}
