@@ -1,9 +1,0 @@
-from django.conf.urls.defaults import patterns, include, url
-from library.models import *
-
-urlpatterns = patterns('library.admin_views',
-
-  url(r'^loan$', 'lateLoans'),
-  url(r'^loan/$', 'lateLoans'),
-
-)
