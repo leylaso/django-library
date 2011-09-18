@@ -53,7 +53,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for book in books %}
+      {% for book in books.object_list %}
         <tr class="{% cycle 'odd' 'even' %}">
           <th><a href="/bk/{{book.id}}">{{book.title}}</a></th>
           <td>{{book.author}}</td>
@@ -64,19 +64,19 @@
     </tbody>
   </table>
 
-  <!--<div class="pagination">
+  <div class="pagination">
     <span class="step-links">
         {% if books.has_previous %}
-            <a href="?page={{ books.previous_page_number }}">previous</a>
+            <a href="?page={{ books.previous_page_number }}">&lsaquo;&lsaquo;</a>
         {% endif %}
 
         <span class="current">
-            Page {{ books.number }} of {{ books.paginator.num_pages }}.
+            page {{ books.number }}/{{ books.paginator.num_pages }}
         </span>
 
         {% if books.has_next %}
-            <a href="?page={{ books.next_page_number }}">next</a>
+            <a href="?page={{ books.next_page_number }}">&rsaquo;&rsaquo;</a>
         {% endif %}
     </span>
-  </div>-->
+  </div>
 {% endblock %}

@@ -34,18 +34,18 @@ def booksBy(request, args=''):
     bookQuery = 'Book.objects.all()'
   exec "books = " + bookQuery
 
-#  pagedBook = Paginator(books, 50)
-#  curPage = request.GET.get('page')
-#
-#  if curPage:
-#    try:
-#      bookPage = pagedBook.page(curPage)
-#    except PageNotAnInteger:
-#      bookPage = pagedBook.page(1)
-#    except EmptyPage:
-#      bookPage = pagedBook.page(pagedBook.num_pages)
-#  else:
-#    bookPage = pagedBook.page(1)
+  pagedBook = Paginator(books, 50)
+  curPage = request.GET.get('page')
+
+  if curPage:
+    try:
+      bookPage = pagedBook.page(curPage)
+    except PageNotAnInteger:
+      bookPage = pagedBook.page(1)
+    except EmptyPage:
+      bookPage = pagedBook.page(pagedBook.num_pages)
+  else:
+    bookPage = pagedBook.page(1)
 
   language = {}
   for book in books:
@@ -82,4 +82,4 @@ def booksBy(request, args=''):
   
 
   return render_to_response('library/bookSearch.html',
-    {'books': books, 'langs': language, 'cats': category, 'auths': author, 'active': active})
+    {'books': bookPage, 'langs': language, 'cats': category, 'auths': author, 'active': active})
