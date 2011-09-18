@@ -84,6 +84,7 @@ table thead tr {
 
 body {
   background: #6C0202 url('/static/imgs/background.jpg') no-repeat fixed left top;
+  font-size: 12px;
 }
 
 #main h1,
