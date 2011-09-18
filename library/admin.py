@@ -11,6 +11,7 @@ class BookAdmin(admin.ModelAdmin):
   fieldsets = [
     (None, {'fields': ['title', 'subtitle', 'description', 'author', 'category', 'language']}),
     ('Numéros de référence', {'fields': ['isbn', 'oclc', 'lccn', 'olid'], 'classes': ['collapse']}),
+    ('Liens', {'fields': ['olink', 'cover', 'ebook'], 'classes': ['collapse']}),
   ]
   inlines = [LoanInline]
   list_display = ('title', 'category', 'language')

@@ -2,6 +2,21 @@
 
 {% block title %}{{book.title}}{% endblock %}
 
+{% block sidebar %}
+  <div id="links">
+    {% if book.ebook %}
+      <a href="{{book.ebook}}" target="_blank"><h3>Version numérique</h3>
+    {% endif %}
+    {% if book.cover %}
+      <img src="{{book.cover}}" />
+    {% endif %}
+    {% if book.ebook %}
+      </a>
+    {% endif %}
+ 
+  </div>
+{% endblock %}
+
 {% block content %}
   <h1 id="book-title">{{ book.title }}</h1>
   <h2 id="book-subtitle">{{ book.subtitle }}</h2>
@@ -20,7 +35,11 @@
     </ul>
     <ul id="book-numbers">
       {% if book.olid %}
-      <li><label>Open Library ID</label>: <span>{{book.olid}}</span></li>
+        {% if book.olink %}
+        <li><label>Open Library ID</label>: <span><a href="{{book.olink}}">{{book.olid}}</a></span></li>
+        {% else %}
+        <li><label>Open Library ID</label>: <span>{{book.olid}}</span></li>
+        {% endif %}
       {% endif %}
       {% if book.oclc %}
       <li><label>OCLC/WorldCat</label>: <span><a href="http://www.worldcat.org/oclc/{{book.oclc}}?tab=details">{{book.oclc}}</a></span></li>

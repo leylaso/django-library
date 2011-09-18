@@ -25,6 +25,9 @@ class Book(models.Model):
   oclc = models.CharField(max_length=24, blank=True, verbose_name='OCLC')
   lccn = models.CharField(max_length=24, blank=True, verbose_name='LCCN')
   olid = models.CharField(max_length=24, blank=True, verbose_name='OLID')
+  olink = models.URLField(max_length=256, blank=True, verbose_name='Lien vers Open Library')
+  cover = models.URLField(max_length=256, blank=True, verbose_name='Lien vers une image de la couverture')
+  ebook = models.URLField(max_length=256, blank=True, verbose_name='Lien vers une version éléctronique')
   language = models.CharField(max_length=3, choices= (
     ('MUL', 'Plusieurs/Bilingue'),
     ('fra', 'Français'),
