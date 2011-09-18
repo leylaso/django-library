@@ -160,6 +160,11 @@ body {
   padding: 1em 0 0 2em;
 }
 
+#header h1 a {
+  color: #fff;
+  text-decoration: none;
+}
+
 #sidebar h1,
 #sidebar h2,
 #sidebar h3,
