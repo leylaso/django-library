@@ -13,7 +13,7 @@ class Category(models.Model):
 
 class Author(models.Model):
   surname = models.CharField(max_length=256, verbose_name='Nom')
-  givenames = models.CharField(max_length=256, verbose_name='Prénoms')
+  givenames = models.CharField(max_length=256, verbose_name='Prénoms', blank=True)
   def __unicode__(self):
     return self.givenames + ' ' + self.surname
 
