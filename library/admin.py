@@ -16,10 +16,12 @@ class BookAdmin(admin.ModelAdmin):
   inlines = [LoanInline]
   list_display = ('title', 'available', 'category', 'language')
   list_filter = ['category', 'language']
+  search_fields = ['title']
 
 class BorrowerAdmin(admin.ModelAdmin):
   inlines = [LoanInline]
   list_display = ('name', 'email', 'phone')
+  search_fields = ['name']
 
 admin.site.register(Book, BookAdmin)
 admin.site.register(Borrower, BorrowerAdmin)
