@@ -59,34 +59,44 @@ def booksBy(request, args=''):
 
   language = {}
   if active.has_key('language'):
-    language = None
+    langSorted = None
     actives['language'] = {'text': active['language']}
   else:
-    exec "langs = " + bookQuery + ".values('language').order_by('language').annotate(Count('title'))"
+    exec "langs = " + bookQuery + ".values('language').annotate(Count('title'))"
     for lang in langs:
       language[lang['language']] = {'count': lang['title__count'], 'text': lang['language'], 'link': '/bk' + args + '/language:' + lang['language']}
+    langKeys = language.keys()
+    langKeys.sort()
+    langSorted = map(language.get, langKeys)  
 
   category = {}
   if active.has_key('category'):
-    category = None
+    catSorted = None
     cat = Category.objects.get(id=active['category'])
     actives['category'] = {'text': cat.title, 'link': '/bk' + args + '/category:' + str(cat.id)}
   else:
-    exec "cats = " + bookQuery + ".values('category__id', 'category__title').order_by('category__title').annotate(Count('title'))"
+    exec "cats = " + bookQuery + ".values('category__id', 'category__title').annotate(Count('title'))"
     for cat in cats:
       category[cat['category__title']] = {'count': cat['title__count'], 'text': cat['category__title'], 'link': '/bk' + args + '/category:' + str(cat['category__id'])}    
+    catKeys = category.keys()
+    catKeys.sort()
+    catSorted = map(category.get, catKeys)
+
 
   author = {}
   if active.has_key('author'):
-    category = None
+    authSorted = None
     auth = Author.objects.get(id=active['author'])
     actives['author'] = {'text': auth.__unicode__, 'link': '/bk' + args + '/category:' + str(auth.id)}
   else:
-    exec "auths = " + bookQuery + ".values('author__id', 'author__surname', 'author__givenames').order_by('author__givenames').annotate(Count('title'))"
+    exec "auths = " + bookQuery + ".values('author__id', 'author__surname', 'author__givenames').annotate(Count('title'))"
     for auth in auths:
       authName = auth['author__givenames'] + ' ' + auth['author__surname']
       author[authName] = {'count': auth['title__count'], 'text': authName, 'link': '/bk' + args + '/author:' + str(auth['author__id'])}
-  
+    authKeys = author.keys()
+    authKeys.sort()
+    authSorted = map(author.get, authKeys)
+
   for act in active:
     link = '/bk'
     for a, val in active.items():
@@ -95,4 +105,4 @@ def booksBy(request, args=''):
     actives[act]['link'] = link
 
   return render_to_response('library/bookSearch.html',
-    {'books': bookPage, 'langs': language, 'cats': category, 'auths': author, 'active': actives})
+    {'books': bookPage, 'langs': langSorted, 'cats': catSorted, 'auths': authSorted, 'active': actives})

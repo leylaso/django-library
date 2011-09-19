@@ -15,7 +15,7 @@
   {% if langs %}
   <div id="lang-search">
   <h3>Filtrer par langue</h3>
-    {% for k, v in langs.items %}
+    {% for v in langs %}
     <a class="action" href="{{v.link}}">+</a> {{v.text}} ({{v.count}})<br />
     {% endfor %}
   </div>
@@ -24,7 +24,7 @@
   {% if cats %}
   <div id="cat-search">
   <h3>Filtrer par section</h3>
-    {% for k, v in cats.items %}
+    {% for v in cats %}
     <a class="action" href="{{v.link}}">+</a> {{v.text}} ({{v.count}})<br />
     {% endfor %}
   </div>
@@ -33,7 +33,7 @@
   {% if auths %}
   <div id="auth-search">
   <h3>Filtrer par auteur</h3>
-    {% for k, v in auths.items %}
+    {% for v in auths %}
     <a class="action" href="{{v.link}}">+</a> {{v.text}} ({{v.count}})<br />
     {% endfor %}
   </div>
