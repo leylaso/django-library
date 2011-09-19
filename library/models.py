@@ -50,6 +50,11 @@ class Book(models.Model):
         if line['returned'] is None:
           result = True
       return result
+  def available(self):
+    if self.not_available():
+      return False
+    else:
+      return True
 
 class Borrower(models.Model):
   name = models.CharField(max_length=256, verbose_name='Nom')

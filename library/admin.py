@@ -14,7 +14,7 @@ class BookAdmin(admin.ModelAdmin):
     ('Liens', {'fields': ['olink', 'cover', 'ebook'], 'classes': ['collapse']}),
   ]
   inlines = [LoanInline]
-  list_display = ('title', 'not_available', 'category', 'language')
+  list_display = ('title', 'available', 'category', 'language')
   list_filter = ['category', 'language']
 
 class BorrowerAdmin(admin.ModelAdmin):
