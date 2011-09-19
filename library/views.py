@@ -18,6 +18,14 @@ def lateLoans(request):
 
 lateLoans = staff_member_required(lateLoans)
 
+def book(request, pk):
+  book = get_object_or_404(Book, pk=pk)
+  if book.not_available():
+    messages = [{'class': 'warning', 'text': "Ce livre n'est pas disponible"}]
+  else:
+    messages = None
+  return render_to_response('library/book.html', {'book': book, 'messages': messages})
+
 def booksBy(request, args=''):
   filters = []
   active = {}

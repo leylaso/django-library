@@ -37,8 +37,19 @@ class Book(models.Model):
   ))
   category = models.ForeignKey(Category, blank=True, null=True, verbose_name='Catégorie')
   author = models.ForeignKey(Author, blank=True, null=True, verbose_name='Auteur')
+  lost = models.BooleanField(default=False, verbose_name='Ce livre est perdu')
   def __unicode__(self):
     return self.title
+  def not_available(self):
+    if self.lost:
+      return self.lost
+    else:
+      loans = self.loan_set.values('returned')
+      result = False
+      for line in loans:
+        if line['returned'] is None:
+          result = True
+      return result
 
 class Borrower(models.Model):
   name = models.CharField(max_length=256, verbose_name='Nom')

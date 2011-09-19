@@ -9,11 +9,7 @@ urlpatterns = patterns('library.views',
   url(r'^$', 'booksBy'),
   url(r'^bk$', 'booksBy'),
 
-  url(r'^bk/(?P<pk>\d+)/$',
-    DetailView.as_view(
-      model=Book,
-      template_name='library/book.html')),
-
+  url(r'^bk/(?P<pk>\d+)/$', 'book'),
 
   url(r'^bk/(?P<args>.+)/$', 'booksBy'),
 )

@@ -17,10 +17,21 @@
   </div>
   <div id="main">
     <div id="content">
-        {% block content %}{% endblock %}
+      {% if messages %}
+        <div id="messages">
+        {% block messages %}
+        {% for message in messages %}
+        <div class="{{ message.class }}">
+          <span class="mark">!</span>{{ message.text }}<span class="mark">!</span>
+        </div>
+        {% endfor %}
+        {% endblock %}
+        </div>
+      {% endif %}
+      {% block content %}{% endblock %}
     </div>
     <div id="sidebar">
-        {% block sidebar %}{% endblock %}
+      {% block sidebar %}{% endblock %}
     </div>
     <div id="footer">
     </div>
