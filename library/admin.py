@@ -6,6 +6,7 @@ from django.contrib import admin
 class LoanInline(admin.TabularInline):
   model = Loan
   extra = 1
+  raw_id_fields = ('book', 'borrower')
 
 class BookAdmin(admin.ModelAdmin):
   fieldsets = [
