@@ -11,10 +11,7 @@
       {% if book.category %}
       <li><label>Category</label>: <span><a href="/bk/category:{{book.category.id}}">{{book.category}}</a></span></li>
       {% endif %}
-      {% if book.author %}
-      <li><label>Author</label>: <span><a href="/bk/author:{{book.author.id}}">{{book.author}}</a></span></li>
-      {% endif %}
-    </ul>
+   </ul>
     <ul id="book-numbers">
       {% if book.olid %}
         {% if book.olink %}
@@ -51,5 +48,13 @@
 
   <h1 id="book-title">{{ book.title }}</h1>
   <h2 id="book-subtitle">{{ book.subtitle }}</h2>
+  {% if book.author %}
+    <h3 id="book-authors">
+    {% for author in book.author.all %}
+      <span class="author"><a href="/bk/author:{{author.id}}">{{author}}</a></span>&nbsp;
+    {% endfor %} 
+    </h3>
+  {% endif %}
+  
   <div id="book-desc">{{ book.description }}</div>
 {% endblock %}

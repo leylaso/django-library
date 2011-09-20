@@ -47,7 +47,7 @@
     <thead>
       <tr>
         <th>Livre</th>
-        <th>Auteur</th>
+        <th>Auteurs</th>
         <th>Section</th>
         <th>Langue</th>
       </tr>
@@ -56,7 +56,7 @@
       {% for book in books.object_list %}
         <tr class="{% cycle 'odd' 'even' %}">
           <th><a href="/bk/{{book.id}}">{{book.title}}</a></th>
-          <td>{{book.author}}</td>
+          <td>{% for author in book.author.all %}<span>{{ author }}</span>&nbsp;&nbsp;&nbsp;{% endfor %}</td>
           <td>{{book.category}}</td>
           <td class="book-lang">{{book.language}}</td>
         </tr>
