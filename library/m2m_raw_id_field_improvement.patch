@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+
+
+  <head>
+    <title>
+      m2m_raw_id_field_improvement.patch on Ticket #10293 – Attachment
+     – Django
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/raw-attachment/ticket/10293/m2m_raw_id_field_improvement.patch" type="text/x-diff; charset=utf-8" title="Original Format" />
+        <link rel="up" href="/ticket/10293" title="Ticket #10293" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/diff.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/code.css" type="text/css" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search Django" />
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/diff.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+      <script type="text/javascript" src="/chrome/common/js/folding.js"></script>
+      <script type="text/javascript">
+        jQuery(document).ready(function($) {
+          $('#preview table.code').enableCollapsibleColumns($('#preview table.code thead th.content'));
+        });
+      </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="django-code">
+      <div id="django-container">
+        <div id="django-header">
+          <h1 id="django-logo"><a href="https://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/site/hdr_logo.gif" alt="Django" /></a></h1>
+          <ul id="django-nav-global">
+            <li><a href="https://www.djangoproject.com/">Home</a></li>
+            <li><a href="https://www.djangoproject.com/download/">Download</a></li>
+            <li><a href="https://docs.djangoproject.com/">Documentation</a></li>
+            <li><a href="https://www.djangoproject.com/weblog/">Weblog</a></li>
+            <li><a href="https://www.djangoproject.com/community/">Community</a></li>
+            <li id="django-active-nav"><a href="/">Code</a></li>
+          </ul>
+        </div>
+        <div id="django-billboard"><h2><a href="/">Code</a></h2></div>
+        <div id="django-columnwrap">
+          <div id="django-content-main">
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="https://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/site/hdr_logo.gif" alt="Django" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="https://www.djangoproject.com/accounts/register/">Register</a></li><li><a href="/prefs">Preferences</a></li><li class="last"><a href="https://www.djangoproject.com/accounts/password/reset/">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/browser">Browse Source</a></li><li><a href="/wiki/Reports">Reports</a></li><li><a href="/query">View Tickets</a></li><li><a href="/newticket">New Ticket</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="last first"><a href="/ticket/10293">Back to Ticket #10293</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="attachment">
+        <h1><a href="/ticket/10293">Ticket #10293</a>: m2m_raw_id_field_improvement.patch</h1>
+        <table id="info" summary="Description">
+          <tbody>
+            <tr>
+              <th scope="col">File m2m_raw_id_field_improvement.patch,
+                <span title="553 bytes">553 bytes</span>
+                (added by joaoolavo@…, <a class="timeline" href="/timeline?from=2009-03-26T09%3A35%3A44-07%3A00&amp;precision=second" title="2009-03-26T09:35:44-07:00 in Timeline">2 years</a> ago)</th>
+            </tr>
+            <tr>
+              <td class="message searchable">
+                <p>
+Patch with the improvement
+</p>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="preview" class="searchable">
+          
+  <div class="diff">
+  <ul class="entries">
+      <li class="entry">
+        <h2>
+          <a>widgets.py</a>
+        </h2>
+        <table class="trac-diff inline" summary="Differences" cellspacing="0">
+              <colgroup><col class="lineno" /><col class="lineno" /><col class="content" /></colgroup>
+              <thead>
+                <tr>
+                  <th title="File widgets.py 2009-03-26 17:32:49.000000000 -0300">
+                      old
+                  </th>
+                  <th title="File widgets.py.original 2009-03-26 17:32:12.000000000 -0300">
+                      new
+                  </th>
+                  <td><em></em> </td>
+                </tr>
+              </thead>
+            <tbody class="unmod">
+                  <tr>
+                          <th>169</th><th>169</th><td class="l"><span>&nbsp; &nbsp; &nbsp; &nbsp; return self.base_url_parameters()</span> </td>
+                  </tr><tr>
+                          <th>170</th><th>170</th><td class="l"><span>&nbsp; &nbsp; </span> </td>
+                  </tr><tr>
+                          <th>171</th><th>171</th><td class="l"><span>&nbsp; &nbsp; def label_for_value(self, value):</span> </td>
+                  </tr>
+            </tbody><tbody class="mod">
+                      <tr class="first">
+                        <th>172</th><th> </th><td class="l"><span>&nbsp; &nbsp; &nbsp; &nbsp; value = [int(v) for v in value.split(',')]</span> </td>
+                      </tr><tr>
+                        <th>173</th><th> </th><td class="l"><span>&nbsp; &nbsp; &nbsp; &nbsp; objs = self.rel.to._default_manager.filter(pk__in=value)</span> </td>
+                      </tr><tr>
+                        <th>174</th><th> </th><td class="l"><span>&nbsp; &nbsp; &nbsp; &nbsp; return '&amp;nbsp;&lt;strong&gt;%s&lt;/strong&gt;' % ',&amp;nbsp;'.join(truncate_words(obj, 14) for obj in objs)</span> </td>
+                      </tr>
+                      <tr class="last">
+                        <th> </th><th>172</th><td class="r"><span>&nbsp; &nbsp; &nbsp; &nbsp; return ''</span> </td>
+                      </tr>
+            </tbody><tbody class="unmod">
+                  <tr>
+                          <th>175</th><th>173</th><td class="l"><span></span> </td>
+                  </tr><tr>
+                          <th>176</th><th>174</th><td class="l"><span>&nbsp; &nbsp; def value_from_datadict(self, data, files, name):</span> </td>
+                  </tr><tr>
+                          <th>177</th><th>175</th><td class="l"><span>&nbsp; &nbsp; &nbsp; &nbsp; value = data.get(name, None)</span> </td>
+                  </tr>
+            </tbody>
+        </table>
+      </li>
+  </ul>
+</div>
+
+        </div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="last first">
+          <a rel="nofollow" href="/raw-attachment/ticket/10293/m2m_raw_id_field_improvement.patch">Original Format</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right"></p>
+    </div>
+          </div>
+        </div>
+        <div id="django-footer">
+          <p>© 2005-2010 <a href="https://www.djangoproject.com/foundation/">Django Software Foundation</a> unless otherwise noted. Django is a registered trademark of the Django Software Foundation.
+          Hosting graciously provided by <a href="http://mediatemple.net/">
+          <img style="vertical-align: middle; position: relative; top: -1px;" src="https://www.djangoproject.com/m/img/site/mt.png" alt="media temple" /></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -36,7 +36,7 @@ class Book(models.Model):
     ('AUT', 'Autre'),
   ))
   category = models.ForeignKey(Category, blank=True, null=True, verbose_name='Catégorie')
-  author = models.ForeignKey(Author, blank=True, null=True, verbose_name='Auteur')
+  author = models.ManyToManyField(Author, blank=True, null=True, verbose_name='Auteur')
   lost = models.BooleanField(default=False, verbose_name='Ce livre est perdu')
   def __unicode__(self):
     return self.title
