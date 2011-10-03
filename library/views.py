@@ -91,7 +91,10 @@ def booksBy(request, args=''):
   else:
     exec "auths = " + bookQuery + ".values('author__id', 'author__surname', 'author__givenames').annotate(Count('title'))"
     for auth in auths:
-      authName = auth['author__givenames'] + ' ' + auth['author__surname']
+      if auth['author__givenames'] is None:
+        authName = auth['author__surname']
+      else:
+        authName = auth['author__givenames'] + ' ' + auth['author__surname']
       author[authName] = {'count': auth['title__count'], 'text': authName, 'link': '/bk' + args + '/author:' + str(auth['author__id'])}
     authKeys = author.keys()
     authKeys.sort()
