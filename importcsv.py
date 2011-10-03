@@ -5,7 +5,7 @@ import os
 
 def clearDB():
   # TODO make sure to purge secret data from here before committing this!
-  os.system("mysql -u dira_library -p'secret' dira_library < trash.sql")
+  os.system("mysql -u dira_library -p dira_library < trash.sql")
 
 def csvOpen(csvfile, delimiter="\t", quotechar='"'):
   return csv.reader(open(csvfile, 'rb'), delimiter=delimiter, quotechar=quotechar)
@@ -76,10 +76,13 @@ def process(csv, fields = ['author', 'title', 'year', 'publisher'], language='en
         if len(book['publisher']) > 0:
           pub = savePub(book['publisher'])
 
-        book = Book(title=book['title'], year=book['year'], category=cat, publisher=pub, language=language)
-        book.save()
-        book.author.add(auth)
-        book.save()
+        try:
+          book = Book(title=book['title'], year=book['year'], category=cat, publisher=pub, language=language)
+          book.save()
+          book.author.add(auth)
+          book.save()
+        except:
+          printLine(row)
       else:
         printLine(row)
   return str(valid) + " rows imported\n"
