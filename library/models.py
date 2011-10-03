@@ -11,6 +11,13 @@ class Category(models.Model):
   def __unicode__(self):
     return self.title
 
+class Publisher(models.Model):
+  name = models.CharField(max_length=256, verbose_name='Nom')
+  link = models.URLField(max_length=256, blank=True, verbose_name="Lien vers l'éditeur.")
+  description = models.TextField(verbose_name='Déscription', blank=True)
+  def __unicode__(self):
+    return self.name
+
 class Author(models.Model):
   surname = models.CharField(max_length=256, verbose_name='Nom')
   givenames = models.CharField(max_length=256, verbose_name='Prénoms', blank=True)
@@ -37,6 +44,9 @@ class Book(models.Model):
   ))
   category = models.ForeignKey(Category, blank=True, null=True, verbose_name='Catégorie')
   author = models.ManyToManyField(Author, blank=True, null=True, verbose_name='Auteur')
+  year = models.CharField(max_length=4, blank=True, verbose_name='Année') 
+  publisher = models.ForeignKey(Publisher, blank=True, null=True, verbose_name='Édition')
+  genre = models.CharField(max_length=256, blank=True, verbose_name='Genre')
   lost = models.BooleanField(default=False, verbose_name='Ce livre est perdu')
   def __unicode__(self):
     return self.title

@@ -10,7 +10,7 @@ class LoanInline(admin.TabularInline):
 
 class BookAdmin(admin.ModelAdmin):
   fieldsets = [
-    (None, {'fields': ['title', 'subtitle', 'description', 'author', 'category', 'language', 'lost']}),
+    (None, {'fields': ['title', 'subtitle', 'description', 'author', 'publisher', 'year', 'category', 'genre', 'language', 'lost']}),
     ('Numéros de référence', {'fields': ['isbn', 'oclc', 'lccn', 'olid'], 'classes': ['collapse']}),
     ('Liens', {'fields': ['olink', 'cover', 'ebook'], 'classes': ['collapse']}),
   ]
@@ -25,6 +25,7 @@ class BorrowerAdmin(admin.ModelAdmin):
   list_display = ('name', 'email', 'phone')
   search_fields = ['name']
 
+admin.site.register(Publisher)
 admin.site.register(Book, BookAdmin)
 admin.site.register(Borrower, BorrowerAdmin)
 admin.site.register(Category)
