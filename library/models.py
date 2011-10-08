@@ -22,7 +22,10 @@ class Author(models.Model):
   surname = models.CharField(max_length=256, verbose_name='Nom')
   givenames = models.CharField(max_length=256, verbose_name='Prénoms', blank=True)
   def __unicode__(self):
-    return self.surname + ', ' + self.givenames
+    if self.givenames:
+      return self.surname + ', ' + self.givenames
+    else:
+      return self.surname
 
 class Book(models.Model):
   title = models.CharField(max_length=256, verbose_name='Titre')
@@ -49,7 +52,10 @@ class Book(models.Model):
   genre = models.CharField(max_length=256, blank=True, verbose_name='Genre')
   lost = models.BooleanField(default=False, verbose_name='Ce livre est perdu')
   def __unicode__(self):
-    return self.title + ': ' + self.subtitle
+    if self.subtitle:
+      return self.title + ': ' + self.subtitle
+    else:
+      return self.title
   def not_available(self):
     if self.lost:
       return self.lost
