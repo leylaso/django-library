@@ -22,7 +22,7 @@ class BookAdmin(admin.ModelAdmin):
   inlines = [LoanInline]
   list_display = ('title', 'available', 'category', 'language')
   list_filter = ['category', 'language', 'author']
-  search_fields = ['title']
+  search_fields = ['title', 'subtitle']
   raw_id_fields = ['author', 'publisher']
 
 class BorrowerAdmin(admin.ModelAdmin):
