@@ -11,7 +11,7 @@ class LoanInline(admin.TabularInline):
 class BookInline(admin.TabularInline):
   model = Book
   extra = 1
-  fields = ['title', 'publisher', 'year', 'category']
+  fields = ['__unicode__', 'publisher', 'year', 'category']
 
 class BookAdmin(admin.ModelAdmin):
   fieldsets = [
@@ -20,7 +20,7 @@ class BookAdmin(admin.ModelAdmin):
     ('Liens', {'fields': ['olink', 'cover', 'ebook'], 'classes': ['collapse']}),
   ]
   inlines = [LoanInline]
-  list_display = ('title', 'available', 'category', 'language')
+  list_display = ('__unicode__', 'available', 'category', 'language')
   list_filter = ['category', 'language', 'author']
   search_fields = ['title', 'subtitle']
   raw_id_fields = ['author', 'publisher']
