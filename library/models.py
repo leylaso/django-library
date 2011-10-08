@@ -22,7 +22,7 @@ class Author(models.Model):
   surname = models.CharField(max_length=256, verbose_name='Nom')
   givenames = models.CharField(max_length=256, verbose_name='Prénoms', blank=True)
   def __unicode__(self):
-    return self.givenames + ' ' + self.surname
+    return self.surname + ', ' + self.givenames
 
 class Book(models.Model):
   title = models.CharField(max_length=256, verbose_name='Titre')

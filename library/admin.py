@@ -8,6 +8,11 @@ class LoanInline(admin.TabularInline):
   extra = 1
   raw_id_fields = ('book', 'borrower')
 
+class BookInline(admin.TabularInline):
+  model = Book
+  extra = 1
+  fields = ['title', 'publisher', 'year', 'category']
+
 class BookAdmin(admin.ModelAdmin):
   fieldsets = [
     (None, {'fields': ['title', 'subtitle', 'description', 'author', 'publisher', 'year', 'category', 'genre', 'language', 'lost']}),
@@ -16,18 +21,24 @@ class BookAdmin(admin.ModelAdmin):
   ]
   inlines = [LoanInline]
   list_display = ('title', 'available', 'category', 'language')
-  list_filter = ['category', 'language']
+  list_filter = ['category', 'language', 'author']
   search_fields = ['title']
-  raw_id_fields = ['author']
+  raw_id_fields = ['author', 'publisher']
 
 class BorrowerAdmin(admin.ModelAdmin):
   inlines = [LoanInline]
   list_display = ('name', 'email', 'phone')
   search_fields = ['name']
 
-admin.site.register(Publisher)
+class AuthorAdmin(admin.ModelAdmin):
+  search_fields = ['surname', 'givenames']
+
+class PublisherAdmin(admin.ModelAdmin):
+  search_fields = ['name']
+
+admin.site.register(Publisher, PublisherAdmin)
 admin.site.register(Book, BookAdmin)
 admin.site.register(Borrower, BorrowerAdmin)
 admin.site.register(Category)
-admin.site.register(Author)
+admin.site.register(Author, AuthorAdmin)
 admin.site.register(Loan)
