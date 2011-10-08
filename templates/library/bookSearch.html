@@ -18,7 +18,7 @@
     <div class="facet">
       <h3>{{ t }}</h3>
       {% for v in facet %}
-      <a class="action" href="/portfolio{{v.link}}">+</a> {{v.text}} ({{v.count}})<br />
+      <a class="action" href="{{v.link}}">+</a> {{v.text}} ({{v.count}})<br />
       {% endfor %}
     </div>
     {% endfor %}

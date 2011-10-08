@@ -87,13 +87,13 @@ def booksBy(request, args=''):
   if catSorted:
     facets['Section'] = catSorted
 
-  author = {}
   if active.has_key('author'):
-    authSorted = None
     auth = Author.objects.get(id=active['author'])
-    actives['author'] = {'text': auth.__unicode__, 'link': '/bk' + args + '/category:' + str(auth.id)}
-  else:
-    authSorted = None
+    actives['author'] = {'text': auth.__unicode__, 'link': '/bk' + args + '/author:' + str(auth.id)}
+
+  if active.has_key('publisher'):
+    pub = Publisher.objects.get(id=active['publisher'])
+    actives['publisher'] = {'text': pub.__unicode__, 'link': '/bk' + args + '/publisher:' + str(pub.id)}
 
   for act in active:
     link = '/bk'
@@ -103,4 +103,4 @@ def booksBy(request, args=''):
     actives[act]['link'] = link
 
   return render_to_response('library/bookSearch.html',
-    {'books': bookPage, 'facets': facets, 'langs': langSorted, 'cats': catSorted, 'auths': authSorted, 'active': actives})
+    {'books': bookPage, 'facets': facets, 'active': actives})
