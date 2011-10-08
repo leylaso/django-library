@@ -56,6 +56,7 @@ def booksBy(request, args=''):
     bookPage = pagedBook.page(1)
 
   actives = {}
+  facets = {}
 
   language = {}
   if active.has_key('language'):
@@ -68,6 +69,8 @@ def booksBy(request, args=''):
     langKeys = language.keys()
     langKeys.sort()
     langSorted = map(language.get, langKeys)  
+  if langSorted:
+    facets['Language'] = langSorted
 
   category = {}
   if active.has_key('category'):
@@ -81,7 +84,8 @@ def booksBy(request, args=''):
     catKeys = category.keys()
     catKeys.sort()
     catSorted = map(category.get, catKeys)
-
+  if catSorted:
+    facets['Section'] = catSorted
 
   author = {}
   if active.has_key('author'):
@@ -89,16 +93,7 @@ def booksBy(request, args=''):
     auth = Author.objects.get(id=active['author'])
     actives['author'] = {'text': auth.__unicode__, 'link': '/bk' + args + '/category:' + str(auth.id)}
   else:
-    exec "auths = " + bookQuery + ".values('author__id', 'author__surname', 'author__givenames').annotate(Count('title'))"
-    for auth in auths:
-      if auth['author__givenames'] is None:
-        authName = auth['author__surname']
-      else:
-        authName = auth['author__givenames'] + ' ' + auth['author__surname']
-      author[authName] = {'count': auth['title__count'], 'text': authName, 'link': '/bk' + args + '/author:' + str(auth['author__id'])}
-    authKeys = author.keys()
-    authKeys.sort()
-    authSorted = map(author.get, authKeys)
+    authSorted = None
 
   for act in active:
     link = '/bk'
@@ -108,4 +103,4 @@ def booksBy(request, args=''):
     actives[act]['link'] = link
 
   return render_to_response('library/bookSearch.html',
-    {'books': bookPage, 'langs': langSorted, 'cats': catSorted, 'auths': authSorted, 'active': actives})
+    {'books': bookPage, 'facets': facets, 'langs': langSorted, 'cats': catSorted, 'auths': authSorted, 'active': actives})
