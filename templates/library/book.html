@@ -11,6 +11,12 @@
       {% if book.category %}
       <li><label>Category</label>: <span><a href="/bk/category:{{book.category.id}}">{{book.category}}</a></span></li>
       {% endif %}
+      {% if book.publisher %}
+      <li><label>Publisher</label>: <span><a href="/bk/publisher:{{book.publisher.id}}">{{book.publisher}}</a></span></li>
+      {% endif %}
+      {% if book.year %}
+      <li><label>Year</label>: {{book.year}}</span></li>
+      {% endif %}
    </ul>
     <ul id="book-numbers">
       {% if book.olid %}
