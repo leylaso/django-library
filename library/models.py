@@ -45,10 +45,10 @@ class Book(models.Model):
     ('esp', 'Espagnol'),
     ('AUT', 'Autre'),
   ))
-  category = models.ForeignKey(Category, blank=True, null=True, verbose_name='Catégorie')
+  category = models.ForeignKey(Category, blank=True, null=True, verbose_name='Section')
   author = models.ManyToManyField(Author, blank=True, null=True, verbose_name='Auteur')
   year = models.CharField(max_length=4, blank=True, verbose_name='Année') 
-  publisher = models.ForeignKey(Publisher, blank=True, null=True, verbose_name='Édition')
+  publisher = models.ForeignKey(Publisher, blank=True, null=True, verbose_name="Maison d'édition")
   genre = models.CharField(max_length=256, blank=True, verbose_name='Genre')
   lost = models.BooleanField(default=False, verbose_name='Ce livre est perdu')
   def __unicode__(self):
