@@ -2,6 +2,10 @@
 
 from django.db import models
 import datetime
+import simplejson
+import pycurl
+import StringIO
+import re
 
 # Create your models here.
 
@@ -72,6 +76,23 @@ class Book(models.Model):
       return False
     else:
       return True
+  def sanitize_isbn(self):
+    if self.isbn:
+      pattern = re.compile('[^0-9]')
+      return pattern.sub('', self.isbn)
+  def fetch_olrecord(self):
+    if self.isbn:
+      curlReq = pycurl.Curl()
+      burl = 'http://openlibrary.org/api/books?bibkeys=ISBN:' + self.sanitize_isbn() + '&format=json&jscmd=data'
+      curlReq.setopt(pycurl.URL, burl.__str__())
+      curlReq.setopt(pycurl.FOLLOWLOCATION, 1)
+      curlReq.setopt(pycurl.MAXREDIRS, 5)
+      book = StringIO.StringIO()
+      curlReq.setopt(pycurl.WRITEFUNCTION, book.write)
+      curlReq.perform()
+      book = StringIO.StringIO(book.getvalue())
+      book = simplejson.load(book)
+      return book[book.keys()[0]]
 
 class Borrower(models.Model):
   name = models.CharField(max_length=256, verbose_name='Nom')
