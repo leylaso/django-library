@@ -21,6 +21,7 @@ class Publisher(models.Model):
 class Author(models.Model):
   surname = models.CharField(max_length=256, verbose_name='Nom')
   givenames = models.CharField(max_length=256, verbose_name='Prénoms', blank=True)
+  olid = models.CharField(max_length=24, blank=True, verbose_name='OLID')
   def __unicode__(self):
     if self.givenames:
       return self.surname + ', ' + self.givenames
