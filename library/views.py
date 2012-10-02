@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from django.template import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import json
 import datetime
 
 def lateLoans(request):
@@ -17,6 +18,17 @@ def lateLoans(request):
   )
 
 lateLoans = staff_member_required(lateLoans)
+
+def getISBN(request):
+    q = request.GET.get('term', '')
+    results = []
+    ojson = {}
+    ojson['label'] = '1234567891'
+    ojson['value'] = 'le livre !'
+    results.append(ojson)
+    data = json.dumps(results)
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)	
 
 def book(request, pk):
   book = get_object_or_404(Book, pk=pk)

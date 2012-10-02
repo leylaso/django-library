@@ -1,9 +1,11 @@
 from django.conf.urls.defaults import patterns, include, url
 from library.models import *
 from django.views.generic import DetailView, ListView
+from django.contrib import admin
+from library.admin import *
 
 urlpatterns = patterns('library.views',
-
+  url(r'^api/ISBN/', 'getISBN'),
   url(r'^admin/library/loan/$', 'lateLoans'),
 
   url(r'^$', 'booksBy'),
@@ -12,4 +14,5 @@ urlpatterns = patterns('library.views',
   url(r'^bk/(?P<pk>\d+)/$', 'book'),
 
   url(r'^bk/(?P<args>.+)/$', 'booksBy'),
+  url(r'^admin/', include(admin.site.urls)),
 )
