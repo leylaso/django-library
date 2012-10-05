@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*- 
 
+from pyaws import ecs
 from django.shortcuts import render_to_response, get_object_or_404
 from library.models import * 
 from django.db.models import Count
@@ -8,7 +9,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.template import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
+import amazon
 import datetime
+import string
 
 def lateLoans(request):
   return render_to_response(
@@ -19,12 +22,72 @@ def lateLoans(request):
 
 lateLoans = staff_member_required(lateLoans)
 
+def amazonSetCrap():
+    ecs.setLicenseKey('AKIAIC3CSPGDWZS7L7BA')
+    ecs.setSecretKey('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')
+    ecs.setOptions({'AssociateTag':'8253-7802-6885'})
+
+def makePublisher(request):
+    results = {'id' : "asdf"}
+    data = json.dumps(results)
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)	
+
+	 
+def makeAuthor(request):
+    q = request.GET.get('value', '')
+    if (string.find(q, " ")):
+      [lastName, firstName] =  string.split(q, ' ')
+    a = Author.objects.filter(surname=lastName ).filter(givenames=firstName)
+    if (len(a)):
+	id = a[0].id
+    else:
+      auth = Author(surname=lastName, givenames=firstName)
+      auth.save()
+      id = auth.id
+    results = {'id' : id}
+    data = json.dumps(results)
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)	
+
 def getISBN(request):
+    valuesToGet = ['Title', 'Edition', 'PublicationDate', 'Publisher', 'UPC', 'SKU', 'NumberOfPages', 'EAN', 'Author']
+    q = request.GET.get('term', '')
+    amazonSetCrap()
+    ojson = {}
+    try:
+        b = ecs.ItemLookup(q, IdType="ISBN", SearchIndex="Books", ResponseGroup="Large")
+        for val in valuesToGet:
+	  if (hasattr(b, val)):
+            ojson[val] = getattr(b, val)
+          else:
+            ojson[val] = "undefined"
+        if (hasattr(b, 'PublicationDate')): 
+          ojson['PublicationYear'] = b.PublicationDate[0:4]
+        else:
+          ojson['PublicationYear'] = 'Undefined' 
+    except:
+        ojson['label'] = "No such ISBN :( !"
+        ojson['value'] = q
+    results = []
+    results.append(ojson)
+    data = json.dumps(results)
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)	
+
+
+def searchISBN(request):
     q = request.GET.get('term', '')
     results = []
     ojson = {}
-    ojson['label'] = '1234567891'
-    ojson['value'] = 'le livre !'
+    amazonSetCrap()
+    try:
+        b = ecs.ItemLookup(q, IdType="ISBN", SearchIndex="Books", ResponseGroup="Small")
+        ojson['label'] = b.Title + ' - ' + b.Author
+        ojson['value'] = q
+    except:
+        ojson['label'] = "No such ISBN :( !"
+        ojson['value'] = q
     results.append(ojson)
     data = json.dumps(results)
     mimetype = 'application/json'

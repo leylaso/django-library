@@ -5,7 +5,10 @@ from django.contrib import admin
 from library.admin import *
 
 urlpatterns = patterns('library.views',
-  url(r'^api/ISBN/', 'getISBN'),
+  url(r'^api/makePublisher/', 'makePublisher'),
+  url(r'^api/makeAuthor/', 'makeAuthor'),
+  url(r'^api/searchISBN/', 'searchISBN'),
+  url(r'^api/getISBN/', 'getISBN'),
   url(r'^admin/library/loan/$', 'lateLoans'),
 
   url(r'^$', 'booksBy'),

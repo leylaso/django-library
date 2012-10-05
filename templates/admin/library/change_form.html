@@ -6,10 +6,41 @@
 </script> <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
 <script>
 $(function() {
-  $("#ISBN").autocomplete({
-    source: "/api/ISBN/",
-    minLength: 9,
-  });
+  // the mapping of the field to autocomplete with the ISBN JSON call
+  map = { 'Title': 'id_title',
+	'Author': 'INDIRECT:id_author',
+	'Publisher': 'INDIRECT:id_publisher',
+	'PublicationYear': 'id_year' };
+  
+   
+  $("#ISBN").autocomplete({source: "/api/searchISBN/", minLength: 9, select: function(event, ui) {
+	$.getJSON("/api/getISBN/", {
+ 		  "term": $("input#ISBN").val()}, 
+		  function(data) {
+			$.each(data, function(key, val) {
+				$.each(val, function(key, val) { 
+					if (key in map) {
+					  v = map[key];
+					  a = map[key];
+                                          if (map[key].slice(0,9) != 'INDIRECT:') {
+					    $('input#' + map[key]).val(val);
+                                          } else {
+					    $.getJSON("/api/make" + key + "/",
+ 		  		              {"value" : val}, 
+                                              function(dataSub) {
+						if("id" in dataSub) {
+                                                  alert(map[key].slice(9,map[key].length) + " text " + dataSub["id"]);
+						  $('input#' + map[key].slice(9,map[key].length)).val(dataSub["id"]);
+						}
+					      }
+					    ) 
+					 }
+				       }
+				})
+			})
+		  });
+	}});
+     
 });
 </script>
 {% endblock %}
