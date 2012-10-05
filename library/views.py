@@ -31,12 +31,14 @@ def makePublisher(request):
     name = request.GET.get('value', '')
     a = Publisher.objects.filter(name=name )
     if (len(a)):
+      message = "The publisher is already in the database (" + name + ")! We just added a link to those guys !"
       id = a[0].id
     else:
       pub = Publisher(name=name)
       pub.save()
       id = pub.id
-    results = {'id' : id}
+      message = "The publisher didn't exist in the database (" + name + ")! We just created it (id:" + str(id) + ") !"
+    results = {'message' : message, 'id' : id}
     mimetype = 'application/json'
     return HttpResponse(json.dumps(results), mimetype)	
 	 
@@ -51,11 +53,13 @@ def makeAuthor(request):
     a = Author.objects.filter(surname=lastName ).filter(givenames=firstName)
     if (len(a)):
 	id = a[0].id
+	message = "The author already is in the database (" + q + ")! We just added a link to the guy !"
     else:
       auth = Author(surname=lastName, givenames=firstName)
+      message = "The author didn't exist in the database (" + q + ")!"
       auth.save()
       id = auth.id
-    results = {'id' : id}
+    results = {'message' : message, 'id' : id}
     data = json.dumps(results)
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)	

@@ -11,7 +11,10 @@ $(function() {
 	'Author': 'INDIRECT:id_author',
 	'Publisher': 'INDIRECT:id_publisher',
 	'PublicationYear': 'id_year' };
-  
+  var displayMessage = function(msg, elem) {
+    var msg_div = $('<div class="error_msg"><p>'+msg+'</p></div>');
+    msg_div.insertAfter(elem).fadeIn('slow').animate({opacity: 1.0}, 5000).fadeOut('slow',function() { msg_div.remove(); });
+  };	  
    
   $("#ISBN").autocomplete({source: "/api/searchISBN/", minLength: 9, select: function(event, ui) {
 	$.getJSON("/api/getISBN/", {
@@ -28,6 +31,9 @@ $(function() {
 					    $.getJSON("/api/make" + key + "/",
  		  		              {"value" : val}, 
                                               function(dataSub) {
+						if("message" in dataSub) {
+						  displayMessage(dataSub["message"], $("div.ISBN-widget"));
+						}
 						if("id" in dataSub) {
 						  $('input#' + map[key].slice(9,map[key].length)).val(dataSub["id"]);
 						}
