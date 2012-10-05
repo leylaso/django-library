@@ -29,7 +29,6 @@ $(function() {
  		  		              {"value" : val}, 
                                               function(dataSub) {
 						if("id" in dataSub) {
-                                                  alert(map[key].slice(9,map[key].length) + " text " + dataSub["id"]);
 						  $('input#' + map[key].slice(9,map[key].length)).val(dataSub["id"]);
 						}
 					      }

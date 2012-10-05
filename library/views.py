@@ -28,16 +28,26 @@ def amazonSetCrap():
     ecs.setOptions({'AssociateTag':'8253-7802-6885'})
 
 def makePublisher(request):
-    results = {'id' : "asdf"}
-    data = json.dumps(results)
+    name = request.GET.get('value', '')
+    a = Publisher.objects.filter(name=name )
+    if (len(a)):
+      id = a[0].id
+    else:
+      pub = Publisher(name=name)
+      pub.save()
+      id = pub.id
+    results = {'id' : id}
     mimetype = 'application/json'
-    return HttpResponse(data, mimetype)	
-
+    return HttpResponse(json.dumps(results), mimetype)	
 	 
 def makeAuthor(request):
     q = request.GET.get('value', '')
+    # if there is a space this is a multiple part name :(
     if (string.find(q, " ")):
-      [lastName, firstName] =  string.split(q, ' ')
+      # however fucking amazon gives us a string, so we just need to split it (but there might be more than two parts)
+      f =  string.split(q, ' ')
+      lastName = f[0]
+      firstName = string.join(f[1:], ' ') # bullshit
     a = Author.objects.filter(surname=lastName ).filter(givenames=firstName)
     if (len(a)):
 	id = a[0].id
