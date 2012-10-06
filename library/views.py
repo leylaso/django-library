@@ -69,7 +69,7 @@ def getISBN(request):
     valuesToGet = ['Title', 'Edition', 'PublicationDate', 'Publisher', 'UPC', 'SKU', 'NumberOfPages', 'EAN', 'Author']
     q = request.GET.get('term', '')
     amazonSetCrap()
-    ojson = {}
+    ojson = {'ISBN': q}
     try:
         b = ecs.ItemLookup(q, IdType="ISBN", SearchIndex="Books", ResponseGroup="Large")
         for val in valuesToGet:
