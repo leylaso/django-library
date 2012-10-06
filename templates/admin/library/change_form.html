@@ -1,12 +1,13 @@
 {% extends "admin/change_form.html" %}
 {% load i18n %}
 {% block extrahead %}{{ block.super }}
+{% ifequal opts.verbose_name "book" %}
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
 </script> <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
 <style type="text/css">
-.inline-right {
-  float: right;
+li.ISBN-widget {
+  background: transparent;
 }
 </style>
 <script>
@@ -15,6 +16,7 @@ $(function() {
   map = { 'Title': 'id_title',
 	'Author': 'INDIRECT:id_author',
 	'Publisher': 'INDIRECT:id_publisher',
+	'ISBN': 'id_isbn', 
 	'PublicationYear': 'id_year' };
   var displayMessage = function(msg, elem) {
     var msg_div = $('<div class="error_msg"><p>'+msg+'</p></div>');
@@ -37,7 +39,7 @@ $(function() {
  		  		              {"value" : val}, 
                                               function(dataSub) {
 						if("message" in dataSub) {
-						  displayMessage(dataSub["message"], $("div.ISBN-widget"));
+						  displayMessage(dataSub["message"], $("div#content h1"));
 						}
 						if("id" in dataSub) {
 						  $('input#' + map[key].slice(9,map[key].length)).val(dataSub["id"]);
@@ -53,11 +55,28 @@ $(function() {
      
 });
 </script>
+{% endifequal %}
 {% endblock %}
-{% block breadcrumbs %}
+{% if change %}
+{% block object-tools-items %}
 {{ block.super }}
-<div class="ISBN-widget inline-right">
+{% ifequal opts.verbose_name "book" %}
+<li class="ISBN-widget">
   <label for="ISBN">ISBN: </label>
   <input id="ISBN">
-</div>
+</li>
+{% endifequal %}
 {% endblock %}
+{% else %}
+{% block object-tools %}
+{{ block.super }}
+{% ifequal opts.verbose_name "book" %}
+ <ul class="object-tools">
+<li class="ISBN-widget">
+  <label for="ISBN">ISBN: </label>
+  <input id="ISBN">
+</li>
+</ul>
+{% endifequal %}
+{% endblock %}
+{% endif %}
