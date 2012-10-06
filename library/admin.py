@@ -19,10 +19,10 @@ class BookAdmin(admin.ModelAdmin):
     ('Numéros de référence', {'fields': ['isbn', 'oclc', 'lccn', 'olid'], 'classes': ['collapse']}),
     ('Liens', {'fields': ['olink', 'cover', 'ebook'], 'classes': ['collapse']}),
   ]
+  list_filter = ['language', 'category', 'publisher', 'author']
   inlines = [LoanInline]
   list_display = ('__unicode__', 'available', 'category', 'language')
-  list_filter = ['category', 'language', 'author']
-  search_fields = ['title', 'subtitle']
+  search_fields = ['title', 'subtitle', 'author__surname', 'author__givenames', 'publisher__name', 'category__title'] 
   raw_id_fields = ['author', 'publisher']
 
 class BorrowerAdmin(admin.ModelAdmin):
