@@ -8,6 +8,13 @@ import StringIO
 import re
 
 # Create your models here.
+class Topic(models.Model):
+  title = models.CharField(max_length=256, verbose_name='Titre')
+  related_topics = models.ManyToManyField('library.Topic', blank=True, null=True, verbose_name='Sujets reliés', related_name='related_topics_f')
+  subtopics = models.ManyToManyField('library.Topic', blank=True, null=True, verbose_name='Sous-Sujets', related_name='subtopics_f')
+  description = models.TextField(verbose_name='Déscription', blank=True)
+  def __unicode__(self):
+    return self.title
 
 class Category(models.Model):
   title = models.CharField(max_length=256, verbose_name='Titre')
@@ -43,6 +50,7 @@ class Book(models.Model):
   olink = models.URLField(max_length=256, blank=True, verbose_name='Lien vers Open Library')
   cover = models.URLField(max_length=256, blank=True, verbose_name='Lien vers une image de la couverture')
   ebook = models.URLField(max_length=256, blank=True, verbose_name='Lien vers une version éléctronique')
+  topics = models.ManyToManyField('library.Topic', blank=True, null=True, verbose_name='Sujets')
   language = models.CharField(max_length=3, choices= (
     ('MUL', 'Plusieurs/Bilingue'),
     ('fra', 'Français'),

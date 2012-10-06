@@ -15,11 +15,11 @@ class BookInline(admin.TabularInline):
 
 class BookAdmin(admin.ModelAdmin):
   fieldsets = [
-    (None, {'fields': ['title', 'subtitle', 'description', 'author', 'publisher', 'year', 'category', 'genre', 'language', 'lost']}),
+    (None, {'fields': ['title', 'subtitle', 'description', 'author', 'publisher', 'year', 'category', 'genre', 'language', 'lost', 'topics']}),
     ('Numéros de référence', {'fields': ['isbn', 'oclc', 'lccn', 'olid'], 'classes': ['collapse']}),
     ('Liens', {'fields': ['olink', 'cover', 'ebook'], 'classes': ['collapse']}),
   ]
-  list_filter = ['language', 'category', 'publisher', 'author']
+  list_filter = ['language', 'category', 'publisher', 'author', 'topics']
   inlines = [LoanInline]
   list_display = ('__unicode__', 'available', 'category', 'language')
   search_fields = ['title', 'subtitle', 'author__surname', 'author__givenames', 'publisher__name', 'category__title'] 
@@ -41,4 +41,5 @@ admin.site.register(Book, BookAdmin)
 admin.site.register(Borrower, BorrowerAdmin)
 admin.site.register(Category)
 admin.site.register(Author, AuthorAdmin)
+admin.site.register(Topic)
 admin.site.register(Loan)
