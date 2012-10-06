@@ -11,6 +11,15 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+# oh, you need to get PyECS, some bogus fork of some obscure crap
+# the link to that shit (for the fucking time it will last):
+# http://kunxi.org/archives/2008/05/pyaws-030-released/
+AMAZON_THINGIES = {
+  'LicenseKey': '',
+  'AssociateTag': '',
+  'SecretKey': '',
+ }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.

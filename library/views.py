@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from django.template import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.conf import settings
 import json
 import amazon
 import datetime
@@ -23,9 +24,9 @@ def lateLoans(request):
 lateLoans = staff_member_required(lateLoans)
 
 def amazonSetCrap():
-    ecs.setLicenseKey('AKIAIC3CSPGDWZS7L7BA')
-    ecs.setSecretKey('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')
-    ecs.setOptions({'AssociateTag':'8253-7802-6885'})
+    ecs.setLicenseKey(settings.AMAZON_THINGIES['LicenseKey'])
+    ecs.setSecretKey(settings.AMAZON_THINGIES['SecretKey'])
+    ecs.setOptions({'AssociateTag':settings.AMAZON_THINGIES['AssociateTag']})
 
 def makePublisher(request):
     name = request.GET.get('value', '')
