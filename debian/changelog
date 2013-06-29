@@ -1,0 +1,5 @@
+django-library (0.099-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- unknown <dira@unknown>  Sat, 29 Jun 2013 17:39:09 -0400
