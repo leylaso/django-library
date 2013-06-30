@@ -16,6 +16,7 @@ set -e
 
 case "$1" in
     install|upgrade)
+	echo "allo" 
     ;;
 
     abort-upgrade)
