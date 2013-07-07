@@ -13,7 +13,7 @@
   - deployer un django.wsgi
   - deployer un sites-available qui pointe vers le django.wsgi 
 
-- Upgrade notes
+- Upgrade notes from django 1.3 (squeeze) to 1.4 (wheezy)
   - faut changer l'ordre des lignes dans django.wsgi (c'est pas encore dans git ca)
   - faut changer le settings.py, les options sont pas pareil pour la db
   - 
