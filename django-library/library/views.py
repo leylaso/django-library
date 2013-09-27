@@ -64,8 +64,6 @@ def getISBN(request):
     q = request.GET.get('term', '')
     ojson = {'ISBN': q}
     try:
-        # make a proper to open library        
-        # b = ecs.ItemLookup(q, IdType="ISBN", SearchIndex="Books", ResponseGroup="Large")
         a = openlibrary.Api()
         b = a.get_book(q)
         for val in valuesToGet:
