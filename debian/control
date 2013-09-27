@@ -1,0 +1,20 @@
+Source: django-library
+Section: unknown
+Priority: extra
+Maintainer: unknown <dira@unknown>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Git: git://git.debian.org/collab-maint/django-library.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/django-library.git;a=summary
+
+Package: django-library
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>
+
+Package: django-library-doc
+Architecture: all
+Description: documentation for django-library
+ <insert long description, indented with spaces>

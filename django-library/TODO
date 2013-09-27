@@ -1,0 +1,30 @@
+- faudrait switcher le nom du fichier de config vers le "standard"
+  # Switch to the directory of your project. (Optional.)
+  # os.chdir("/home/user/myproject")
+
+  # Set the DJANGO_SETTINGS_MODULE environment variable.
+  os.environ['DJANGO_SETTINGS_MODULE'] = "myproject.settings"
+
+- Packaging...
+  - installer mod-wsgi (grabbing it from libapache2-mod-wsgi)
+    - eventuellement, penser a permettre des formes d'installations autres
+  - installer python-mysqldb
+  - faire python setup.py install ; 
+  - deployer un django.wsgi
+  - deployer un sites-available qui pointe vers le django.wsgi 
+
+- Upgrade notes from django 1.3 (squeeze) to 1.4 (wheezy)
+  - faut changer l'ordre des lignes dans django.wsgi (c'est pas encore dans git ca)
+  - faut changer le settings.py, les options sont pas pareil pour la db
+  - 
+- Aggrégation de données, les 14 éditions GF, garnier flamarrion, garnier-flamarion, garnier flammarion, flammarion ed., etc.
+- Politique claire par rapport aux gens.
+- On devrait pas garder les informations sur les gens.
+- Il faut deleter la personne
+- Accessible par internet, sans être dépendant de la connection internet
+- On pourrait avoir un ordi en accès public pour chercher dans la bibliothèque
+- Feuille de base pour aider la base de donnée
+- Section séparée pour livre, brochure, DVDs,
+- Champs de recherche automatique (quand t'écris dans la boite auteur, la base de donnée le cherche automatiquement)
+- ca serait bien si ca serait accessible de chez eux
+- Débogage !!!
