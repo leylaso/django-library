@@ -66,6 +66,8 @@ def getISBN(request):
     try:
         # make a proper to open library        
         # b = ecs.ItemLookup(q, IdType="ISBN", SearchIndex="Books", ResponseGroup="Large")
+        a = openlibrary.Api()
+        b = a.get_book(q)
         for val in valuesToGet:
 	  if (hasattr(b, val)):
             ojson[val] = getattr(b, val)
@@ -90,9 +92,11 @@ def searchISBN(request):
     results = []
     ojson = {}
     try:
-        # make a proper to open library        
-        # b = ecs.ItemLookup(q, IdType="ISBN", SearchIndex="Books", ResponseGroup="Large")
-        ojson['label'] = b.Title + ' - ' + b.Author
+        a = openlibrary.Api()
+        b = a.get_book(q)
+        ojson['label'] = b.get_title() + ' - '
+        for a in b.get_authors():
+            ojson['label'] += a.get_name() + ', '
         ojson['value'] = q
     except:
         ojson['label'] = "No such ISBN :( !"
