@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*- 
 
-from pyaws import ecs
 from django.shortcuts import render_to_response, get_object_or_404
 from library.models import * 
 from django.db.models import Count
@@ -22,11 +21,6 @@ def lateLoans(request):
   )
 
 lateLoans = staff_member_required(lateLoans)
-
-def amazonSetCrap():
-    ecs.setLicenseKey(settings.AMAZON_THINGIES['LicenseKey'])
-    ecs.setSecretKey(settings.AMAZON_THINGIES['SecretKey'])
-    ecs.setOptions({'AssociateTag':settings.AMAZON_THINGIES['AssociateTag']})
 
 def makePublisher(request):
     name = request.GET.get('value', '')
@@ -68,10 +62,10 @@ def makeAuthor(request):
 def getISBN(request):
     valuesToGet = ['Title', 'Edition', 'PublicationDate', 'Publisher', 'UPC', 'SKU', 'NumberOfPages', 'EAN', 'Author']
     q = request.GET.get('term', '')
-    amazonSetCrap()
     ojson = {'ISBN': q}
     try:
-        b = ecs.ItemLookup(q, IdType="ISBN", SearchIndex="Books", ResponseGroup="Large")
+        # make a proper to open library        
+        # b = ecs.ItemLookup(q, IdType="ISBN", SearchIndex="Books", ResponseGroup="Large")
         for val in valuesToGet:
 	  if (hasattr(b, val)):
             ojson[val] = getattr(b, val)
@@ -95,9 +89,9 @@ def searchISBN(request):
     q = request.GET.get('term', '')
     results = []
     ojson = {}
-    amazonSetCrap()
     try:
-        b = ecs.ItemLookup(q, IdType="ISBN", SearchIndex="Books", ResponseGroup="Small")
+        # make a proper to open library        
+        # b = ecs.ItemLookup(q, IdType="ISBN", SearchIndex="Books", ResponseGroup="Large")
         ojson['label'] = b.Title + ' - ' + b.Author
         ojson['value'] = q
     except:
