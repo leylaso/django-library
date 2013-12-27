@@ -11,38 +11,3 @@
 
 %:
 	dh $@ --with python2
-
-override_dh_auto_install:
-	python setup.py install --root=$(CURDIR)/debian/tmp --no-compile -O0 --install-layout=deb
-	install -d -m 755  $(CURDIR)/debian/tmp/usr/share/openstack-dashboard
-	install -d -m 755 $(CURDIR)/debian/tmp/etc/openstack-dashboard
-
-
-	cp -a $(CURDIR)/openstack_dashboard/ $(CURDIR)/debian/tmp/usr/share/openstack-dashboard/
-
-	cp $(CURDIR)/openstack_dashboard/local/local_settings.py.example \
-		$(CURDIR)/debian/tmp/etc/openstack-dashboard/local_settings.py
-	cp $(CURDIR)/manage.py \
-		$(CURDIR)/debian/tmp/usr/share/openstack-dashboard/
-	ln -fs /etc/openstack-dashboard/local_settings.py \
-		$(CURDIR)/debian/tmp/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.py
-
-	# openstack-dashboard-apache
-	install -d -m 755 $(CURDIR)/debian/tmp/etc/apache2/sites-available/
-	cp -a $(CURDIR)/debian/openstack-dashboard-apache.conf $(CURDIR)/debian/tmp/etc/apache2/sites-available/openstack-dashboard
-
-override_dh_auto_clean:
-	dh_auto_clean
-	rm -rf $(CURDIR)/horizon/build
-	rm -rf $(CURDIR)/horizon.egg-info
-	rm -rf $(CURDIR)/openstack_dashboard/openstack_dashboard.egg-info
-
-get-vcs-source:
-	git remote add upstream git://github.com/openstack/horizon.git || true
-	git fetch upstream
-	git archive --prefix=horizon-2012.1.1/ 2012.1.1 | xz >../horizon_2012.1.1.orig.tar.xz
-	if ! git checkout master ; then \
-		echo "No upstream branch: checking out" ; \
-		git checkout -b master upstream/master ; \
-	fi
-	git checkout debian/unstable
