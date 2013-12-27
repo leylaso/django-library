@@ -2,6 +2,7 @@ Source: django-library
 Section: unknown
 Priority: extra
 Maintainer: unknown <dira@unknown>
+Uploaders: Antoine Beaupré <anarcat@debian.org>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.2
 Homepage: <insert the upstream URL, if relevant>

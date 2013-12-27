@@ -1,3 +1,10 @@
+django-library (1.0.0) unstable; urgency=low
+
+  * Make this a native package
+  * Add myself as uploader
+
+ -- Antoine Beaupré <anarcat@debian.org>  Fri, 27 Dec 2013 09:38:44 -0500
+
 django-library (0.099-guigui) unstable; urgency=low
 
   * Initial release 
