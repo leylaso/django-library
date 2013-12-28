@@ -1,3 +1,9 @@
+django-library (1.0.0-1) unstable; urgency=low
+
+  * Make ME sign the package :D
+
+ -- Guillaume Le Punk <gbeaulieu@koumbit.org>  Fri, 27 Dec 2013 09:38:44 -0500
+
 django-library (1.0.0) unstable; urgency=low
 
   * Make this a native package
