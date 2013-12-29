@@ -2,6 +2,7 @@
 *.pyc
 # The settings file has secret data in it, so don't track that
 settings.py
+build/*
 # Don't track anything in the files or static folders
 static/*
 files/*
