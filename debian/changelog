@@ -1,6 +1,7 @@
 django-library (1.0.1) unstable; urgency=low
 
   * Make ME sign the package :D
+  * Added the needed dependencies in the package
 
  -- Guillaume Le Punk <gbeaulieu@koumbit.org>  Sat, 28 Dec 2013 18:30:44 -0500
 
