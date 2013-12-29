@@ -6,17 +6,13 @@
   os.environ['DJANGO_SETTINGS_MODULE'] = "myproject.settings"
 
 - Packaging...
-  - installer mod-wsgi (grabbing it from libapache2-mod-wsgi)
-    - eventuellement, penser a permettre des formes d'installations autres
   - installer python-mysqldb
   - faire python setup.py install ; 
   - deployer un django.wsgi
   - deployer un sites-available qui pointe vers le django.wsgi 
-
 - Upgrade notes from django 1.3 (squeeze) to 1.4 (wheezy)
   - faut changer l'ordre des lignes dans django.wsgi (c'est pas encore dans git ca)
   - faut changer le settings.py, les options sont pas pareil pour la db
-  - 
 - Aggrégation de données, les 14 éditions GF, garnier flamarrion, garnier-flamarion, garnier flammarion, flammarion ed., etc.
 - Politique claire par rapport aux gens.
 - On devrait pas garder les informations sur les gens.
