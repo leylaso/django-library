@@ -12,5 +12,6 @@ setup(name='django-library',
       author_email='gbeaulieu@koumbit.org',
       packages=['django-library', 'django-library.library'],
       url='https://github.com/GuillaumeFromage/django-library',
-      package_data = { 'django-library.library': ['static/imgs/*', 'static/css/*'] }
+      package_data = { 'django-library.library': ['static/imgs/*', 'static/css/*']},
+      data_files = [ ('/etc/django-library', ['django-library/django-library.apache2.ex']) ]
      )
