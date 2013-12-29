@@ -20,7 +20,7 @@ set -x
 DESTDIR=
 APACHE2_SITES_AVAILABLE=$DESTDIR/etc/apache2/sites-available/
 HTML=$DESTDIR/var/www/
-APACHE2_RESTART=apache2ctl restart
+APACHE2_RESTART='apache2ctl restart'
 APACHE2_ENABLE_SITE=a2ensite
 APACHE2_DISABLE_SITE=a2disite
 SITE_NAME=django-library
