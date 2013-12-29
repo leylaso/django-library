@@ -20,3 +20,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends},
 Description: Django project to provide a searchable database for small libraries
   Provides numerous interlinked objects, books and loans, authors, borrowers and
   publishers, with a django web interface.
+
+Package: django-library-doc
+Architecture: all
+Description: documentation for django-library
