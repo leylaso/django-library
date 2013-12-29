@@ -1,7 +1,7 @@
 Source: django-library
 Section: python
 Priority: extra
-Maintainer: unknown <gbeaulieu@koumbit.org>
+Maintainer: Guillaume Le Punk <gbeaulieu@koumbit.org>
 Uploaders: Antoine Beaupré <anarcat@debian.org>
 Build-Depends: debhelper (>= 8.0.0), python
 Standards-Version: 3.9.4
@@ -11,5 +11,11 @@ Homepage: https://github.com/GuillaumeFromage/django-library
 
 Package: django-library
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Django project to provide a searchable database of books and loans for small libraries
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends},
+ apache2,
+ libapache2-mod-wsgi (>=2.3),
+ python-django,
+ libjs-jquery,
+Description: Django project to provide a searchable database for small libraries
+  Provides numerous interlinked objects, books and loans, authors, borrowers and
+  publishers, with a django web interface.
