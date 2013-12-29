@@ -32,7 +32,7 @@ case "$1" in
        if [ -f "$APACHE2_SITES_AVAILABLE$HOSTNAME" ]; then 
             echo "Error: can't recreate the django-library"; exit 2;
         else 
-            cat django-library.apache2 | sed 's|##HTMLPAYLOAD##|$HTMLPAYLOAD|' | sed 's|##HOSTNAME##|$HOSTNAME|' > $APACHE2_SITES_AVAILABLE$HOSTNAME ; \
+            cat /etc/django-library/django-library.apache2.ex | sed 's|##HTMLPAYLOAD##|$HTMLPAYLOAD|' | sed 's|##HOSTNAME##|$HOSTNAME|' > $APACHE2_SITES_AVAILABLE$HOSTNAME ; \
             $APACHE2_ENABLE_SITE $HOSTNAME ;
             $APACHE2_RESTART ;
         fi ; 
