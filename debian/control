@@ -23,5 +23,6 @@ Description: Django project to provide a searchable database for small libraries
 
 Package: django-library-doc
 Architecture: all
+Section: doc
 Description: documentation for django-library
   Just a TODO file but there used to be an install file
