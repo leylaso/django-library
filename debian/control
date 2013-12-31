@@ -12,6 +12,7 @@ Homepage: https://github.com/GuillaumeFromage/django-library
 Package: django-library
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends},
+ python-simplejson,
  python-mysqldb,
  apache2,
  libapache2-mod-wsgi (>=2.3),
