@@ -60,22 +60,34 @@ def makeAuthor(request):
     return HttpResponse(data, mimetype)	
 
 def getISBN(request):
-    valuesToGet = ['Title', 'Edition', 'PublicationDate', 'Publisher', 'UPC', 'SKU', 'NumberOfPages', 'EAN', 'Author']
+    valuesToGet = ['title', 'publish_date', 'publishers', 'number_of_pages', 'authors']
     q = request.GET.get('term', '')
     ojson = {'ISBN': q}
     try:
         a = openlibrary.Api()
         b = a.get_book(q)
-        for val in valuesToGet:
-	  if (hasattr(b, val)):
-            ojson[val] = getattr(b, val)
-          else:
-            ojson[val] = "undefined"
-        if (hasattr(b, 'PublicationDate')): 
-          ojson['PublicationYear'] = b.PublicationDate[0:4]
+        ojson['debug'] = dir(b);
+        if (hasattr(b, 'title')): 
+          ojson['Title'] = b.title
+        if (hasattr(b, 'authors')): 
+          author = b.authors.pop()
+          ojson['Author'] = author.name
+          while len(b.authors):
+            author = b.authors.pop()
+            ojson['Author'] += ', ' + author.name
+        if (hasattr(b, 'publishers')): 
+          pub = b.publishers.pop()
+          ojson['Publisher'] = pub.name
+          while len(b.publishers):
+            pub = b.publishers.pop()
+            ojson['publishers'] += ', ' + pub.name
+        if (hasattr(b, 'publish_date')): 
+          ojson['PublicationYear'] = b.publish_date[0:4]
         else:
           ojson['PublicationYear'] = 'Undefined' 
     except:
+        import traceback
+        ojson['trace'] = traceback.format_exc()
         ojson['label'] = "No such ISBN :( !"
         ojson['value'] = q
     results = []
