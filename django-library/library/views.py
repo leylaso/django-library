@@ -8,7 +8,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.template import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
-from library.openlibrary import openlibrary
+import openlibrary
 import json
 import datetime
 import string
