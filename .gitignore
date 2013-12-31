@@ -6,7 +6,5 @@ build/*
 # Don't track anything in the files or static folders
 static/*
 files/*
-library/openlibrary/*
-library/python-openlibrary/*
 # Don't track swp files created by vim
 *.swp
