@@ -42,7 +42,7 @@ class Author(models.Model):
 class Book(models.Model):
   title = models.CharField(max_length=256, verbose_name='Titre')
   subtitle = models.CharField(max_length=256, blank=True, verbose_name='Sous-titre')
-  description = models.TextField(verbose_name='Déscription', blank=True)
+  description = models.TextField(verbose_name='Description', blank=True)
   isbn = models.CharField(max_length=24, blank=True, verbose_name='ISBN')
   oclc = models.CharField(max_length=24, blank=True, verbose_name='OCLC')
   lccn = models.CharField(max_length=24, blank=True, verbose_name='LCCN')
