@@ -18,7 +18,7 @@ class Topic(models.Model):
 
 class Category(models.Model):
   title = models.CharField(max_length=256, verbose_name='Titre')
-  description = models.TextField(verbose_name='Déscription', blank=True)
+  description = models.TextField(verbose_name='Description', blank=True)
   def __unicode__(self):
     return self.title
 
