@@ -12,7 +12,7 @@ class Topic(models.Model):
   title = models.CharField(max_length=256, verbose_name='Titre')
   related_topics = models.ManyToManyField('library.Topic', blank=True, null=True, verbose_name='Sujets reliés', related_name='related_topics_f')
   subtopics = models.ManyToManyField('library.Topic', blank=True, null=True, verbose_name='Sous-Sujets', related_name='subtopics_f')
-  description = models.TextField(verbose_name='Déscription', blank=True)
+  description = models.TextField(verbose_name='Description', blank=True)
   def __unicode__(self):
     return self.title
 
@@ -25,7 +25,7 @@ class Category(models.Model):
 class Publisher(models.Model):
   name = models.CharField(max_length=256, verbose_name='Nom')
   link = models.URLField(max_length=256, blank=True, verbose_name="Lien vers l'éditeur.")
-  description = models.TextField(verbose_name='Déscription', blank=True)
+  description = models.TextField(verbose_name='Description', blank=True)
   def __unicode__(self):
     return self.name
 
