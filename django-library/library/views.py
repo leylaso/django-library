@@ -71,7 +71,7 @@ def getISBN(request):
         # using python-requests and stop depending on unpackaged shit soon
         if debug:
           ojson['debug'] = dir(b)
-        if (hasattr(b, 'identifiers') and hasattr(b.identifiers, 'openlibrary')): 
+        if (hasattr(b, 'identifiers') and 'openlibrary' in b.identifiers):
           # better than nothing
           ojson['OLID'] = b.identifiers['openlibrary'][0]
         if (hasattr(b, 'title')): 
