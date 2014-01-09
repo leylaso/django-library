@@ -61,12 +61,19 @@ def makeAuthor(request):
 
 def getISBN(request):
     valuesToGet = ['title', 'publish_date', 'publishers', 'number_of_pages', 'authors']
+    debug = request.GET.get('debug', '')
     q = request.GET.get('term', '')
     ojson = {'ISBN': q}
     try:
         a = openlibrary.Api()
         b = a.get_book(q)
-        ojson['debug'] = dir(b);
+        # Its currently a deprecated API and still changes sometimes... I'll move to
+        # using python-requests and stop depending on unpackaged shit soon
+        if debug:
+          ojson['debug'] = dir(b)
+        if (hasattr(b, 'identifiers') and hasattr(b.identifiers, 'openlibrary')): 
+          # better than nothing
+          ojson['OLID'] = b.identifiers['openlibrary'][0]
         if (hasattr(b, 'title')): 
           ojson['Title'] = b.title
         if (hasattr(b, 'authors')): 
@@ -83,6 +90,11 @@ def getISBN(request):
             ojson['publishers'] += ', ' + pub.name
         if (hasattr(b, 'publish_date')): 
           ojson['PublicationYear'] = b.publish_date[0:4]
+          # I've witnessed one case of this happening, when publish date is 
+          # along the lines of November 1998. Its better to put garbage that
+          # will crash but will be easy to fix by a human.
+          if not ojson['PublicationYear'].isdigit():
+            ojson['PublicationYear'] = b.publish_date 
         else:
           ojson['PublicationYear'] = 'Undefined' 
     except:
@@ -93,9 +105,12 @@ def getISBN(request):
     results = []
     results.append(ojson)
     data = json.dumps(results)
+    # this doesn't work, but it would be nice if it would.
+    if debug:
+      mimetype = 'text/html'
+      return HttpResponse('<pre>' + data + '</pre>', mimetype)	
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)	
-
 
 def searchISBN(request):
     q = request.GET.get('term', '')
