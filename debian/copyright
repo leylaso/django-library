@@ -1,12 +1,14 @@
 Format: http://dep.debian.net/deps/dep5/
 Upstream-Name: django-library
 Upstream-Contact: Guillaume Le Punk <gbeaulieu@koumbit.org>
-Source: https://github.com/GuillaumeFromage/django-library
-Copyright: 2013 Guillaume Le Punk <gbeaulieu@koumbit.org> 
+Source: https://github.com/sfyn/django-library
+Copyright: 2013-2014 Guillaume Le Punk <gbeaulieu@koumbit.org> 
+           2011-2013 Sfyn <me@sfyn.net>
 License: GPL-2+
 
 Files: *
-Copyright: 2013 Guillaume Le Punk <gbeaulieu@koumbit.org> 
+Copyright: 2013-2014 Guillaume Le Punk <gbeaulieu@koumbit.org> 
+           2011-2013 Sfyn <me@sfyn.net>
 License: GPL-2+
 
 License: GPL-2+
